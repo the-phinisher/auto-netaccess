@@ -1,5 +1,7 @@
 # IITM Netacess Auto Update
 
+Automatic authorization renewal for [IITM netaccess](https://netaccess.iitm.ac.in).
+
 Requires NodeJS, see: [NodeJS download and installation](https://nodejs.org/en/download/package-manager).
 
 > **_NOTE:_** It's recommended to offset your cron times to different values to ensure low workload during specific times like the default time.

@@ -1,7 +1,7 @@
 {
   "name": "auto-netaccess",
   "version": "1.0.0",
-  "description": "Auto renewal for IIT Madras' netaccess",
+  "description": "Automated authorization renewal for IIT Madras' netaccess",
   "main": "index.js",
   "author": "Gandhar Vabale",
   "dependencies": {

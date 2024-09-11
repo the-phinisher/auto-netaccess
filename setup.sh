@@ -66,7 +66,7 @@ if [[ "$GEN_ENV_FILE" == "1" ]]; then
 fi
 
 echo
-echo "Checking credentials and testing script..."
+echo "Checking credentials and running tests..."
 echo
 
 node $(pwd)/index.js
@@ -90,10 +90,17 @@ if [ $? -eq 0 ]; then
     fi
 fi
 
-read -p "Enter cron schedule (default: 0 * * * *): " CRON_SCHEDULE
+DEFAULT_CRON_SCHEDULE="$((RANDOM % 60)) $((RANDOM % 6 + 10)) * * *"
+
+echo
+echo "Default cron schedule is set to randomized minute and hour between 10 am to 4 pm"
+echo
+echo "Note: cron job will not execute if system not active during the specified time."
+echo
+read -p "Enter cron schedule (default: $DEFAULT_CRON_SCHEDULE): " CRON_SCHEDULE
 
 if [ -z "$CRON_SCHEDULE" ]; then
-    CRON_SCHEDULE="0 * * * *"
+    CRON_SCHEDULE=$DEFAULT_CRON_SCHEDULE
 fi
 
 NEW_CRON_JOB="$CRON_SCHEDULE $NEW_CRON_JOB_COMMAND"
