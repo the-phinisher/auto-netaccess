@@ -1,0 +1,11 @@
+{
+  "name": "auto-netaccess",
+  "version": "1.0.0",
+  "description": "Auto renewal for IIT Madras' netaccess",
+  "main": "index.js",
+  "author": "Gandhar Vabale",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "puppeteer": "^23.3.0"
+  }
+}
