@@ -77,7 +77,8 @@ if [ ! $? -eq 0 ]; then
     exit $?
 fi
 
-NEW_CRON_JOB_COMMAND="node $(pwd)/index.js"
+NODEJS_PATH=$(which node)
+NEW_CRON_JOB_COMMAND="cd $(pwd) && $NODEJS_PATH $(pwd)/index.js"
 
 crontab -l | grep -F "$NEW_CRON_JOB_COMMAND" > /dev/null 2>&1
 
