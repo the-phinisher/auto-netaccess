@@ -59,9 +59,11 @@ if [[ "$GEN_ENV_FILE" == "1" ]]; then
     if [[ "$ROLLNO" != *\"* ]] && [[ "$PASSWORD" != *\"* ]]; then
         echo "ROLLNO=\"$ROLLNO\"" > .env
         echo "PASSWD=\"$PASSWD\"" >> .env
+	echo "IPCOUNT=10" >> .env
     else
         echo "ROLLNO='$ROLLNO'" > .env
         echo "PASSWD='$PASSWD'" >> .env
+	echo "IPCOUNT=10" >> .env
     fi
 fi
 
