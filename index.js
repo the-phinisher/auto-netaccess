@@ -1,3 +1,5 @@
+'use strict';
+
 const pupeteer = require("puppeteer");
 
 require("dotenv").config();
