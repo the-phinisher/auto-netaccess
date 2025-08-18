@@ -1,8 +1,8 @@
 "use strict";
 
-const pupeteer = require("puppeteer");
+const puppeteer = require("puppeteer");
 
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const env = process.env;
 
 const removePreviousIP = async (page) => {
@@ -28,20 +28,30 @@ const removePreviousIP = async (page) => {
 };
 
 const main = async () => {
-  {
-    const browser = await pupeteer.launch();
-    const page = await browser.newPage();
-    await page.goto("https://netaccess.iitm.ac.in/account/login");
-    await page.setViewport({ width: 1080, height: 1024 });
-    await page.locator("#username").fill(env.ROLLNO);
-    await page.locator("#password").fill(env.PASSWD);
-    await page.click("#submit");
-    await page.click('a[href="/account/approve"]');
-    await page.click("#radios-1");
-    await page.click("#approveBtn");
-    await removePreviousIP(page);
-    await browser.close();
-  }
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto("https://netaccess.iitm.ac.in/account/login");
+  await page.setViewport({ width: 1080, height: 1024 });
+  await page.locator("#username").fill(env.ROLLNO);
+  await page.locator("#password").fill(env.PASSWD);
+
+  // Wait for navigation after clicking submit
+  await Promise.all([
+    page.waitForNavigation({ waitUntil: "networkidle0" }),
+    page.click("#submit"),
+  ]);
+
+  await page.click('a[href="/account/approve"]');
+  await page.click("#radios-1");
+
+  // Wait for navigation after clicking approve button
+  await Promise.all([
+    page.waitForNavigation({ waitUntil: "networkidle0" }),
+    page.click("#approveBtn"),
+  ]);
+
+  await removePreviousIP(page);
+  await browser.close();
 };
 
 main();

@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Gandhar Vabale",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "puppeteer": "^23.3.0"
+    "dotenv": "^17.2.1",
+    "puppeteer": "^24.16.2"
   }
 }
