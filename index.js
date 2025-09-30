@@ -7,7 +7,7 @@ const env = process.env;
 
 const removePreviousIP = async (page) => {
   const activeIPCount = env.IPCOUNT;
-  const deleteButtons = await page.$$("span.label.label-danger");
+  const deleteButtons = await page.$$("button.btn.btn-danger");
 
   const filteredButtons = [];
   for (const btn of deleteButtons) {
@@ -30,7 +30,7 @@ const removePreviousIP = async (page) => {
 const main = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto("https://netaccess.iitm.ac.in/account/login");
+  await page.goto("https://netaccess.iitm.ac.in/login");
   await page.setViewport({ width: 1080, height: 1024 });
   await page.locator("#username").fill(env.ROLLNO);
   await page.locator("#password").fill(env.PASSWD);
@@ -38,16 +38,17 @@ const main = async () => {
   // Wait for navigation after clicking submit
   await Promise.all([
     page.waitForNavigation({ waitUntil: "networkidle0" }),
-    page.click("#submit"),
+    page.click('button[type="submit"]'),
   ]);
 
-  await page.click('a[href="/account/approve"]');
-  await page.click("#radios-1");
+  await page.click('a[href="/approve"]');
+  await page.select('#self_duration', '2');
 
-  // Wait for navigation after clicking approve button
+  await page.click('button[type="submit"]'),
+
   await Promise.all([
     page.waitForNavigation({ waitUntil: "networkidle0" }),
-    page.click("#approveBtn"),
+    page.click('#btnAupAccept'),
   ]);
 
   await removePreviousIP(page);

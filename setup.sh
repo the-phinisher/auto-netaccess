@@ -23,7 +23,7 @@ if [ $? -ne 0 ]; then
 fi
 
 
-URL="https://netaccess.iitm.ac.in/account/login"
+URL="https://netaccess.iitm.ac.in/login"
 STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
 
 # Check if the status code indicates success (200 OK)
